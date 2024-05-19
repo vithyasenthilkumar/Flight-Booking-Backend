@@ -7,7 +7,8 @@ const getAlluser = async(request, response) => {
     const user = await usermodel.find()
     if (user.length === 0)
     {
-       const user = await usermodel.insertMany(initialData)
+       const user = await usermodel.insertMany(userdata)
+       return response.status(200).json(user)
     }
     response.status(200).json(user)
     }
@@ -25,7 +26,7 @@ const addNewuser = async(request, response) => {
         {
             return response.status(409).json({message:'User already exsists.'})
         }
-        const user = await usermodel.create(addNewuser)
+        const user = await usermodel.create(newuser)
         response.status(201).json(user)
     }
     catch(error)
@@ -46,5 +47,26 @@ const updateuser = async(request, response) => {
         response.status(500).json({message:error.message})
     }
 }
+async function getuser(request, response, next) {
+    let user;
+    try {
+        user = await usermodel.findOne({ userID: request.params.userID });
+        if (user == null) {
+            return response.status(404).json({ message: `Cannot find user with ID ${request.params.userID}` });
+        }
+    } catch (error) {
+        return response.status(500).json({ message: error.message });
+    }
+    response.user = user;
+    next();
+}
+const RemoveUser = async (request, response) => {
+    try {
+        await usermodel.deleteOne({userID:request.params.userID});
+        response.json({ message: `Removed the user` });
+    } catch (error) {
+        response.status(500).json({ message: error.message });
+    }
+};
 
-module.exports = {getAlluser, addNewuser, updateuser}
+module.exports = {getAlluser, addNewuser, updateuser,RemoveUser,getuser}

@@ -61,6 +61,5 @@ const Initialdata = [
             "availableSeats": 60
         }
     ]
-    
 ]
 module.exports = Initialdata

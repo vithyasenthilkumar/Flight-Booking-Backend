@@ -1,7 +1,4 @@
 const userdata = [
-    [
-        
-        [
             {
                 "username": "alice_smith",
                 "userID": "12345",
@@ -73,8 +70,4 @@ const userdata = [
                 "userflightTime": "15:30"
             }
         ]
-        
-    ]
-    
-]
 module.exports = userdata

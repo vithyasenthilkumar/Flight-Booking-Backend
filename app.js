@@ -15,6 +15,7 @@ const userRouter = require('./routes/userRouter')
 const validateuserRouter = require('./routes/validateuserRouter')
 const userloginRouter = require('./routes/userloginRouter')
 const SignUpRouter = require('./routes/SignUpRouter') 
+const AdminLoginRouter = require('./routes/AdminLoginRouter')
 
 app.use(cors())
 app.use(express.json())
@@ -28,6 +29,7 @@ app.use('/api/v1/user/validate',validateuserRouter)
 
 app.use('/api/v1/user/login',userloginRouter)
 app.use('/api/v1/user/SignUp',SignUpRouter)
+app.use('/api/v1/admin/login',AdminLoginRouter)
 
 mongoose.connect(process.env.DB_URL)
 const db = mongoose.connection

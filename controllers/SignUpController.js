@@ -1,14 +1,14 @@
-const userModel=require('../models/usermodel')
+const SignUpModel=require('../models/SignUpmodel')
 const addNewUser = async(req,res) => {
-  const user = new userModel (
+  const user = new SignUpModel (
     {
-      usernameame : req.body.username,
+      username : req.body.username,
       email : req.body.email,
-      password : "0000"
+      password : req.body.password
     }
     )
     try{
-      const existingUser = await userModel.findOne({email:String(req.body.email)})
+      const existingUser = await SignUpModel.findOne({email:String(req.body.email)})
      
       if(existingUser){
         return res.status(409).json({message:'email already exists'})
